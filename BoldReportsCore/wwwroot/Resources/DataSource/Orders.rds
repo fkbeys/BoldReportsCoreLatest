@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataSourceDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Extension>WebAPI</Extension>
+  <ConnectString>{"MethodType":"Get","SecurityType":"None","URL":"https://services.odata.org/V4/Northwind/Northwind.svc/Orders","DataFormat":"JSON"}</ConnectString>
+  <UseOriginalConnectString>false</UseOriginalConnectString>
+  <OriginalConnectStringExpressionBased>false</OriginalConnectStringExpressionBased>
+  <CredentialRetrieval>Store</CredentialRetrieval>
+  <WindowsCredentials>false</WindowsCredentials>
+  <ImpersonateUser>false</ImpersonateUser>
+  <UserName>xxxx</UserName>
+  <Password>xxxx</Password>
+  <Enabled>true</Enabled>
+</DataSourceDefinition>

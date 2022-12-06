@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition">
+  <DataSet Name="Orders">
+      <Fields>
+        <Field Name="_odata_context">
+          <DataField>@odata.context</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OrderID">
+          <DataField>OrderID</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="CustomerID">
+          <DataField>CustomerID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EmployeeID">
+          <DataField>EmployeeID</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="OrderDate">
+          <DataField>OrderDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="RequiredDate">
+          <DataField>RequiredDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ShippedDate">
+          <DataField>ShippedDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ShipVia">
+          <DataField>ShipVia</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Freight">
+          <DataField>Freight</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="ShipName">
+          <DataField>ShipName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipAddress">
+          <DataField>ShipAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipCity">
+          <DataField>ShipCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipRegion">
+          <DataField>ShipRegion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipPostalCode">
+          <DataField>ShipPostalCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipCountry">
+          <DataField>ShipCountry</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="_odata_nextLink">
+          <DataField>@odata.nextLink</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceReference>Orders</DataSourceReference>
+        <CommandType>Text</CommandType>
+        <CommandText>{"Name":"Orders","Columns":[]}</CommandText>
+        <QueryDesignerState xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational">
+          <Tables>
+            <Table Name="Orders" Schema="">
+              <Columns>
+                <Column Name="@odata.context" IsDuplicate="False" IsSelected="True" />
+                <Column Name="OrderID" IsDuplicate="False" IsSelected="True" />
+                <Column Name="CustomerID" IsDuplicate="False" IsSelected="True" />
+                <Column Name="EmployeeID" IsDuplicate="False" IsSelected="True" />
+                <Column Name="OrderDate" IsDuplicate="False" IsSelected="True" />
+                <Column Name="RequiredDate" IsDuplicate="False" IsSelected="True" />
+                <Column Name="ShippedDate" IsDuplicate="False" IsSelected="True" />
+                <Column Name="ShipVia" IsDuplicate="False" IsSelected="True" />
+                <Column Name="Freight" IsDuplicate="False" IsSelected="True" />
+                <Column Name="ShipName" IsDuplicate="False" IsSelected="True" />
+                <Column Name="ShipAddress" IsDuplicate="False" IsSelected="True" />
+                <Column Name="ShipCity" IsDuplicate="False" IsSelected="True" />
+                <Column Name="ShipRegion" IsDuplicate="False" IsSelected="True" />
+                <Column Name="ShipPostalCode" IsDuplicate="False" IsSelected="True" />
+                <Column Name="ShipCountry" IsDuplicate="False" IsSelected="True" />
+                <Column Name="@odata.nextLink" IsDuplicate="False" IsSelected="True" />
+              </Columns>
+              <SchemaLevels>
+                <SchemaInfo Name="Orders" SchemaType="Table" />
+              </SchemaLevels>
+            </Table>
+          </Tables>
+        </QueryDesignerState>
+      </Query>
+    </DataSet>
+</SharedDataSet>

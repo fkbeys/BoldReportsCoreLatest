@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "View Report";
+}
+<a class="nav-link text-dark" target="_blank" asp-area="" asp-controller="Home" asp-action="DesignReport" asp-route-name="@ViewBag.ReportName">Edit</a>
+<div class="row">
+    <div style="height: 750px; width: 1200px; min-height: 400px;" id="viewer"></div>
+</div>
+
+<script>
+    var reportName = "@ViewBag.ReportName";
+
+    $("#viewer").boldReportViewer(
+        {
+            reportServiceUrl: "/api/ReportViewer",
+            reportPath: reportName
+        });
+</script>

@@ -1,0 +1,10 @@
+create VIEW customers AS
+SELECT TOP (1000) [AddressID]
+,[AddressLine1]
+,[AddressLine2]
+,[City]
+,[StateProvinceID]
+,[PostalCode]
+,[rowguid]
+,[ModifiedDate]
+FROM [AdventureWorks].[Person].[Address] where SESSION_CONTEXT(N'addressid') = [AddressID];

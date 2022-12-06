@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Embedded Reporting Demo";
+}
+
+<div class="row">
+    <div>
+        <input id="newreport" type="button" value="New Report" />
+    </div>
+
+    <table class="table" id="reportItems">
+        <tr>
+            <th>
+                List of Reports
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.Model)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    <a class="reportview" style="margin: 10px auto auto auto;"
+                       href="\Home\ViewReport?name=@item.Name" target="_blank">View</a>
+                    |
+                    <a class="editreport" style="margin: 10px auto auto auto;"
+                       href="\Home\DesignReport?name=@item.Name" target="_blank">Edit</a>
+                    |
+                    <a class="exportreport" style="margin: 10px auto auto auto;"
+                       href="\api\ReportViewer\Export?name=@item.Name"  target="_blank">Download PDF</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#newreport").click(function () {
+            window.open("/Home/DesignReport");
+        });
+    });
+</script>
+

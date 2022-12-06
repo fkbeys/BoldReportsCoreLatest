@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "Edit Report";
+}
+
+
+<div id="dialog" title="Save As">
+    <div id="save-dialog-container" class="overlay-wrapper" style="display: none; height: 200px; width: 400px">
+        <label for="reportname">Report Name:</label>
+        <input type="text" id="reportname" name="reportname"><br><br>
+        <button id="btn-item-save" type="button">
+            <span>Save</span>
+        </button>
+    </div>
+</div>
+
+
+<div class="row">
+    <div style="height: 750px; width: 1200px; min-height: 400px;" id="designer"></div>
+</div>
+
+<script type="text/javascript">
+    var isFormSubmit = true;
+    var controlId = "designer";
+    var reportName = "@ViewBag.ReportName";
+    var isEditReport = false;
+
+    if (reportName && reportName.length > 0) {
+        isEditReport = true;
+    }
+
+    $("#dialog").ejDialog({ showOnInit: false });
+
+    $('#' + controlId).boldReportDesigner(
+        {
+            serviceUrl: "/api/ReportDesigner",
+            //create: "controlInitialized",
+            //toolbarSettings: {
+            //    items: ej.ReportDesigner.ToolbarItems.All & ~ej.ReportDesigner.ToolbarItems.Save
+            //        & ~ej.ReportDesigner.ToolbarItems.Open & ~ej.ReportDesigner.ToolbarItems.New
+            //},
+            //toolbarClick: "toolbarClick",
+            //toolbarRendering: "toolbarRendering",
+            reportModified: "reportModified",
+            reportSaved: "reportSaved",
+            //permissionSettings: {
+            //    dataSet: ej.ReportDesigner.Permission.Shared,
+            //    dataSource: ~ej.ReportDesigner.Permission.All,
+            //}
+        });
+
+    function addReportData() {
+        $.ajax({
+            type: "GET",
+            url: "/api/Report/DataModel?sharedDataSet=true&dataSetName=Orders",
+            async: false,
+            success: function (data) {
+                var designer = $('#' + controlId).data('boldReportDesigner');
+                var i = 0;
+
+                for (i = 0; i < data.dataSources.length; i++) {
+                    designer.addDataSource(JSON.parse(data.dataSources[i]));
+                }
+
+                for (i = 0; i < data.dataSets.length; i++) {
+                    designer.addDataSet(JSON.parse(data.dataSets[i]));
+                }
+
+                for (i = 0; i < data.parameters.length; i++) {
+                    designer.addParameter(JSON.parse(data.parameters[i]));
+                }
+            }
+        });
+    }
+
+    function newUntitledReport() {
+        var designer = $('#' + controlId).data('boldReportDesigner');
+        reportName = 'Untitled';
+        isEditReport = false;
+       // var newTitle = 'Untitled - Design Report';
+        //document.title = newTitle;
+        designer.newReport(reportName);
+    }
+
+    function controlInitialized(args) {
+        var designer = $('#' + controlId).data('boldReportDesigner')
+        designer.showImportData = false;
+
+        if (isEditReport) {
+            designer.openReport(reportName);
+        }
+        else {
+            newUntitledReport();
+            addReportData();
+        }
+    }
+
+    $(document).ready(function () {
+        $(document.body).bind('submit', $.proxy(winformSubmit, this));
+        $(window).bind('beforeunload', $.proxy(beforeWindowUnload, this));
+    });
+
+    function winformSubmit(args) {
+        isFormSubmit = false;
+    }
+
+    function beforeWindowUnload(args) {
+        if (isFormSubmit) {
+            var designer = $('#designer').data('boldReportDesigner');
+            if (designer.hasReportChanges()) {
+                return 'Changes you made may not be saved';
+            }
+        }
+        isFormSubmit = true;
+    }
+
+    function toolbarRendering(args) {
+        if ($(args.target).hasClass('e-rptdesigner-toolbarcontainer')) {
+            var saveButton = ej.buildTag('li.e-rptdesigner-toolbarli e-designer-toolbar-align e-tooltxt', '', {}, {});
+            var saveIcon = ej.buildTag('span.e-rptdesigner-toolbar-icon e-toolbarfonticonbasic e-rptdesigner-toolbar-save e-li-item', '', {}, { title: 'Save' });
+            args.target.find('ul:first').append(saveButton.append(saveIcon));
+        }
+    }
+
+    function toolbarClick(args) {
+        if (args.click === 'Save') {
+            args.cancel = true;
+            var designer = $('#' + controlId).data('boldReportDesigner');
+
+            if (isEditReport) {
+                designer.saveReport();
+            } else {
+                savePopup();
+            }
+        }
+    }
+
+
+    function reportSaved(args) {
+        isEditReport = true;
+    }
+
+    function reportModified(args) {
+        //$('#' + controlId + '_file_div').css('display', 'none');
+        if (args.isModified) {
+            // $('.report-status').html('(Edited)');
+        }
+    }
+
+    function savePopup() {
+        $("#reportname").val("");
+        $("#dialog").ejDialog("open");
+        $("#save-dialog-container").show();
+    }
+
+    $(document).on("click", "#btn-item-save", function () {
+        reportName = $("#reportname").val();
+        var designer = $('#' + controlId).data('boldReportDesigner');
+        designer.saveReport(reportName);
+        $("#dialog").ejDialog("close");
+    });
+</script>
